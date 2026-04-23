@@ -1,0 +1,19 @@
+<mat-card>
+    <div class="header-row">
+      <h2>Your Transactions</h2>
+      <button mat-raised-button routerLink="/transactions/new">Add New</button>
+    </div>
+  
+    <div class="transaction-item" *ngFor="let transaction of transactions$ | async">
+      <div>
+        <strong>{{ transaction.categoryName }}</strong>
+        <p>{{ transaction.type }} | {{ transaction.date | date }}</p>
+        <p>{{ transaction.notes }}</p>
+      </div>
+  
+      <div class="actions">
+        <span>{{ transaction.amount | currency }}</span>
+        <button mat-button color="warn" (click)="deleteTransaction(transaction.id!)">Delete</button>
+      </div>
+    </div>
+</mat-card>
