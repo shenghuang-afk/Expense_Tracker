@@ -1,0 +1,22 @@
+<mat-card class="form-card">
+    <h2>Set Monthly Budget</h2>
+  
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Category</mat-label>
+        <input matInput formControlName="categoryName" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Budget Limit</mat-label>
+        <input matInput type="number" formControlName="limit" />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Month</mat-label>
+        <input matInput type="month" formControlName="month" />
+      </mat-form-field>
+  
+      <button mat-raised-button type="submit">Save Budget</button>
+    </form>
+</mat-card>

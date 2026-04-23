@@ -35,8 +35,10 @@
     "@angular/platform-server": "^20.3.0",
     "@angular/router": "^20.3.0",
     "@angular/ssr": "^20.3.24",
+    "echarts": "^6.0.0",
     "express": "^5.1.0",
     "firebase": "^12.12.1",
+    "ngx-echarts": "^20.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "^0.15.1"

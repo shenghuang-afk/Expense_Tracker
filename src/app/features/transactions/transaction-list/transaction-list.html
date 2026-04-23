@@ -4,7 +4,15 @@
       <button mat-raised-button routerLink="/transactions/new">Add New</button>
     </div>
   
-    <div class="transaction-item" *ngFor="let transaction of transactions$ | async">
+    <form [formGroup]="filterForm" class="filter-grid">
+      <input type="date" formControlName="startDate" placeholder="Start Date">
+      <input type="date" formControlName="endDate" placeholder="End Date">
+      <input type="text" formControlName="category" placeholder="Category">
+      <input type="number" formControlName="minAmount" placeholder="Min Amount">
+      <input type="number" formControlName="maxAmount" placeholder="Max Amount">
+    </form>
+  
+    <div class="transaction-item" *ngFor="let transaction of filteredTransactions">
       <div>
         <strong>{{ transaction.categoryName }}</strong>
         <p>{{ transaction.type }} | {{ transaction.date | date }}</p>
@@ -13,7 +21,8 @@
   
       <div class="actions">
         <span>{{ transaction.amount | currency }}</span>
+        <button mat-button [routerLink]="['/transactions/edit', transaction.id]">Edit</button>
         <button mat-button color="warn" (click)="deleteTransaction(transaction.id!)">Delete</button>
       </div>
     </div>
-</mat-card>
+  </mat-card>

@@ -1,5 +1,40 @@
 <mat-card>
     <h2>Dashboard</h2>
-    <p>Welcome to your Expense Tracker.</p>
-    <p>Next we will connect transactions and summary totals here.</p>
+  
+    <div class="summary-grid">
+      <mat-card>
+        <h3>Monthly Income</h3>
+        <p>{{ totalIncome$ | async | currency }}</p>
+      </mat-card>
+  
+      <mat-card>
+        <h3>Monthly Expense</h3>
+        <p>{{ totalExpense$ | async | currency }}</p>
+      </mat-card>
+    </div>
+  
+    <div *ngIf="pieOptions$ | async as pieOptions">
+      <h3>Category-wise Spending</h3>
+      <div echarts [options]="pieOptions" style="height: 400px;"></div>
+    </div>
+  
+    <div *ngIf="barOptions$ | async as barOptions">
+      <h3>Income vs Expense</h3>
+      <div echarts [options]="barOptions" style="height: 400px;"></div>
+    </div>
+
+    <div *ngIf="budgetComparison$ | async as comparisons">
+        <h3>Budget vs Actual</h3>
+      
+        <mat-card *ngFor="let item of comparisons" class="budget-card">
+          <p><strong>Category:</strong> {{ item.categoryName }}</p>
+          <p><strong>Budget:</strong> {{ item.limit | currency }}</p>
+          <p><strong>Actual:</strong> {{ item.actual | currency }}</p>
+          <p><strong>Remaining:</strong> {{ item.remaining | currency }}</p>
+      
+          <p *ngIf="item.status === 'Safe'">Status: Safe</p>
+          <p *ngIf="item.status === 'Nearing budget'">Alert: Nearing budget</p>
+          <p *ngIf="item.status === 'Exceeded budget'">Alert: Exceeded budget</p>
+        </mat-card>
+      </div>
 </mat-card>
